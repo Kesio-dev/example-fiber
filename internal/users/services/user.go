@@ -1,8 +1,8 @@
 package services
 
 import (
+	"airdrop/internal/repositories"
 	"airdrop/internal/users/models"
-	"airdrop/internal/users/repositories"
 )
 
 type UserService struct {
@@ -11,6 +11,10 @@ type UserService struct {
 
 func NewUserService(repo *repositories.UserRepository) *UserService {
 	return &UserService{repo: repo}
+}
+
+func (s *UserService) GetAll() (*[]models.User, error) {
+	return s.repo.FindAll()
 }
 
 func (s *UserService) GetUserByID(id int) (*models.User, error) {

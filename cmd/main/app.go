@@ -1,7 +1,7 @@
 package main
 
 import (
-	"airdrop/internal/tasks"
+	"airdrop/internal/repositories"
 	"airdrop/internal/users"
 	"airdrop/pkg/storage/minio"
 	"airdrop/pkg/storage/redis"
@@ -25,10 +25,13 @@ func main() {
 	redisClient := redis.NewClient()
 	minioClient := minio.NewClient()
 
-	redisService := redis.NewService(redisClient)
+	_ = redis.NewService(redisClient)
 	_ = minio.NewService(minioClient)
-	users.SetupRoutes(app, db)
-	tasks.SetupRoutes(app, db, redisService)
+	_ = repositories.NewTaskRepository(db)
+
+	userRepo := repositories.NewUserRepository(db)
+
+	users.SetupRoutes(app, userRepo)
 
 	err = app.Listen(":5000")
 	if err != nil {

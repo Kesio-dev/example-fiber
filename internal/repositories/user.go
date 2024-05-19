@@ -13,6 +13,15 @@ func NewUserRepository(db *sqlx.DB) *UserRepository {
 	return &UserRepository{db: db}
 }
 
+func (r *UserRepository) FindAll() (*[]models.User, error) {
+	users := []models.User{}
+	err := r.db.Select(&users, "SELECT * FROM users")
+	if err != nil {
+		return nil, err
+	}
+	return &users, nil
+}
+
 func (r *UserRepository) FindByID(id int) (*models.User, error) {
 	user := &models.User{}
 	err := r.db.QueryRow("SELECT id, username, email FROM users WHERE id = $1", id).Scan(&user.ID, &user.Username, &user.Email)

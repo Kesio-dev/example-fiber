@@ -15,6 +15,16 @@ func NewUserController(service *services.UserService) *UserController {
 	return &UserController{service: service}
 }
 
+func (c *UserController) GetUsers(ctx *fiber.Ctx) error {
+	users, err := c.service.GetAll()
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+	}
+	return ctx.JSON(fiber.Map{
+		"users": users,
+	})
+}
+
 func (c *UserController) GetUser(ctx *fiber.Ctx) error {
 	id, err := strconv.Atoi(ctx.Params("id"))
 	if err != nil {
