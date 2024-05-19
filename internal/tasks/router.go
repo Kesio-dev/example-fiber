@@ -11,10 +11,10 @@ import (
 
 func SetupRoutes(app *fiber.App, db *sqlx.DB, redisClient storage.RedisClient) {
 	taskRepo := repositories.NewTaskRepository(db)
-	userService := services.NewTaskService(taskRepo, redisClient)
-	userController := controllers.NewUserController(userService)
+	taskService := services.NewTaskService(taskRepo, redisClient)
+	taskController := controllers.NewTaskController(taskService)
 
 	api := app.Group("tasks")
-	api.Get("/:id", userController.Get)
-	api.Post("/", userController.Create)
+	api.Get("/:id", taskController.Get)
+	api.Post("/", taskController.Create)
 }
