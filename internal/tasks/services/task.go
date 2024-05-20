@@ -1,8 +1,8 @@
 package services
 
 import (
+	"airdrop/internal/models"
 	"airdrop/internal/repositories"
-	"airdrop/internal/tasks/models"
 	"airdrop/pkg/storage"
 )
 

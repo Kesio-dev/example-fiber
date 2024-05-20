@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"airdrop/internal/users/models"
+	"airdrop/internal/models"
 	"github.com/jmoiron/sqlx"
 )
 

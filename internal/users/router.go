@@ -9,12 +9,9 @@ import (
 
 func SetupRoutes(app *fiber.App, userRepo *repositories.UserRepository) {
 	userService := services.NewUserService(userRepo)
-
-	// Создаем контроллер
 	userController := controllers.NewUserController(userService)
 
-	// Настраиваем маршруты
-	app.Get("/users", userController.GetUsers)
-	app.Get("/users/:id", userController.GetUser)
-	app.Post("/users", userController.CreateUser)
+	api := app.Group("/users")
+
+	api.Get("/", userController.GetAll)
 }

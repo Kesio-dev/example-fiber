@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"airdrop/internal/tasks/models"
+	"airdrop/internal/models"
 	"airdrop/internal/tasks/services"
 	"github.com/gofiber/fiber/v2"
 	"strconv"

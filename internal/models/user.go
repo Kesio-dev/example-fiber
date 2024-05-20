@@ -17,19 +17,13 @@ type User struct {
 
 type UserJSON struct {
 	ID        string         `json:"id"`
+	Password  string         `json:"password"`
 	Email     string         `json:"email"`
 	Username  string         `json:"username"`
 	Balance   float64        `json:"balance"`
 	CreatedAt string         `json:"created_at"`
 	RefID     sql.NullString `json:"referrer_id"`
-	RefCount  int            `json:"ref_count"`
 	Avatar    string         `json:"avatar"`
 	Role      string         `json:"user_role"`
 	Status    string         `json:"status"`
-}
-
-type UserCreate struct {
-	Password string  `db:"password"`
-	Email    string  `db:"email"`
-	Balance  float64 `db:"balance"`
 }
